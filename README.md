@@ -1,10 +1,7 @@
 
 # Python-Lectures  
 
-
-
-
-Note: [Andreas Ernst](http://users.monash.edu/~andrease/) has improvised and updated the repo to python 3, [Link](https://gitlab.erc.monash.edu.au/andrease/Python4Maths/tree/master)
+This is a set of lectures built and extended from sources from Rajeth Kumar and Valentin Haenel
 
 ## Introduction
 
@@ -12,7 +9,7 @@ Python is a modern, robust, high level programming language. It is very easy to 
 
 ## Installation
 
-Mac OS X and Linux comes pre installed with python. Windows users can download python from https://www.python.org/downloads/ .
+Mac OS X and Linux come pre-installed with python. Windows users can download python from https://www.python.org/downloads/ .
 
 To install IPython run,
 
@@ -20,41 +17,25 @@ To install IPython run,
     
 This will install all the necessary dependencies for the notebook, qtconsole, tests etc.
 
-### Installation from unofficial distributions
+### Installation using packaged environments
 
-Installing all the necessary libraries might prove troublesome. Anaconda and Canopy comes pre packaged with all the necessary python libraries and also IPython.
+Anaconda comes pre-packaged with all the necessary python libraries and also IPython.
 
 #### Anaconda
 
 Download Anaconda from https://www.continuum.io/downloads
 
-Anaconda is completely free and includes more than 300 python packages. Both python 2.7 and 3.4 options are available.
+Anaconda is completely free and includes more than 300 python packages. Both python 2.7 and 3.6 options are available.
 
-#### Canopy
 
-Download Canopy from https://store.enthought.com/downloads/#default
+## Launching Jupyter Notebook
 
-Canopy has a premium version which offers 300+ python packages. But the free version works just fine. Canopy as of now supports only 2.7 but it comes with its own text editor and IPython environment.
+In the terminal, go to the directory of the ipython notebooks and type
 
-## Launching IPython Notebook
+    jupyter notebook
 
-From the terminal
+In Anaconda, open the respective terminals and execute the above.
 
-    ipython notebook
-
-In Canopy and Anaconda, Open the respective terminals and execute the above.
-
-## How to learn from this resource?
-
-You can download the pdf copy from here : [Get Started with Python](https://github.com/rajathkumarmp/Python-Lectures/blob/master/Python.pdf)
-
-It is better to download all the ipython notebooks from this repository https://github.com/rajathkumarmp/Python-Lectures and learn it on the notebook itself rather than having to refer to a pdf.
-
-Launch ipython notebook from the folder which contains the notebooks. Open each one of them
-
-    Cell > All Output > Clear
-    
-This will clear all the outputs and now you can understand each statement and learn interactively.
 
 ## Table of contents
 
