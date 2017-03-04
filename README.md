@@ -71,6 +71,8 @@ In Anaconda, open the respective terminals and execute the above.
 [09 - NumPy introduction part 2](http://nbviewer.ipython.org/github/cwallraven/Python-Lectures/blob/master/09.ipynb)
 
 
+[10 - Matplotlib introduction](http://nbviewer.ipython.org/github/cwallraven/Python-Lectures/blob/master/10.ipynb)
+
 
 These are online read-only versions.
 
