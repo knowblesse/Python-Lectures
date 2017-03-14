@@ -1,6 +1,22 @@
+------------
 Assignment 1
+------------
+
+This assignment is due Monday, March 20th at 23:59:59 latest via email to
+
+christian.wallraven+AMS2017@gmail.com
+
+I am fine with one email per team. In your email you HAVE to specify the names and student IDs of ALL team members. Zip all code and files you need for letting the program run and name the resulting zip-file in the following way:
+
+<STUDENTID1>_<STUDENTID2>_<...>_A1.zip
+
+Files and submissions that DO NOT have this pattern WILL NOT BE GRADED! Take care to use the correct IDs as these are my way of assigning the scores to individuals!
+
+Since almost all of you will be working in teams, I hope that you split the duties equally. Everyone should code a bit and - most importantly - everyone HAS to FULLY understand EVERY line of code AND be able to EXPLAIN THE CODE TO ME!!!
 
 
+Your task:
+----------
 Let's generate some Shakespeare. From the github-repository, please download the textfile shakespeare.txt (this is downloaded from Project Gutenberg). 
 
 First, use some sort of file-reading to get the data into Python line by line. Each line will be returned to you as a string, with which you need to do some clean-up. 
