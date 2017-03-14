@@ -1,0 +1,38 @@
+Assignment 1
+
+
+Let's generate some Shakespeare. From the github-repository, please download the textfile shakespeare.txt (this is downloaded from Project Gutenberg). 
+
+First, use some sort of file-reading to get the data into Python line by line. Each line will be returned to you as a string, with which you need to do some clean-up. 
+
+First clean-up: Put everything to lower case. 
+
+
+Second clean-up: Since we will not want weird characters, we can use regular expressions to remove the unwanted commas, full stops, etc. For this, you will need to
+
+import re
+
+Regular expressions offer extremely powerful text search and replace mechanisms but are somewhat daunting to grasp at first. For now, we only want to keep everything that is a letter. We can do this by
+
+re.sub(r'\W+', ' ',<stringName>)
+
+
+The resulting string should then be split along the spaces into a list of sub-strings, which should be added to a growing list of words - our dictionary.
+
+
+Next, we want to get the unigrams, that is, all the unique words in Shakespeare. For this, please use the numpy "unique" command (there are other methods in Python, but for this particular assignment "unique" offers the best interface).
+
+Using matplotlib, make a bar plot that shows the 30 most common unigrams in Shakespeare. What are the most common two nouns?
+
+
+From the unigrams, we want to calculate the bigrams. There are easy and fast ways to do this, but here we want to do the slow and painful way. For this, use the full information returned to you by "unique" [numpy.unique(ar, return_index=False, return_inverse=False, return_counts=False)] in order to construct a bigram matrix b (as a 2D numpy array). The rows and column indices will consist of the unigram words and the matrix entries will be the bigram counts. 
+
+Using matplotlib, make a bar plot that shows the 30 most common bigrams in Shakespeare.
+
+
+Finally, we want to generate bigram Shakespeare. I would like you to query your bigram matrix in such a way so as to create the most likely sentence from your data that starts with the word "I". For this, the numpy functions np.where and np.argmax will come in handy to search in the results of the unique command from above! 
+
+Please create a "sentence" that is 30 words in total and print it out. Try two different words and print out the most likely 30-word sentences. What do you observe and why? How could you fix this?
+
+
+
