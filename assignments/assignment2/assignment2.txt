@@ -1,0 +1,81 @@
+------------
+Assignment 2
+------------
+
+This assignment is due Monday, April 3rd at 23:59:59 latest via email to
+
+christian.wallraven+AMS2017@gmail.com
+
+I am fine with one email per team. In your email you HAVE to specify the names and student IDs of ALL team members. Zip all code and files you need for letting the program run and name the resulting zip-file in the following way:
+
+<STUDENTID1>_<STUDENTID2>_<...>_A2.zip
+
+Files and submissions that DO NOT have this pattern WILL NOT BE GRADED! Take care to use the correct IDs as these are my way of assigning the scores to individuals!
+
+Since almost all of you will be working in teams, I hope that you split the duties equally. Everyone should code a bit and - most importantly - everyone HAS to FULLY understand EVERY line of code AND be able to EXPLAIN THE CODE TO ME!!!
+
+
+Your first task [20 points]:
+---------------------------
+Please write a python script called "logistics.py" that replicates the functionality of the figure shown in slide 12 of ode.pdf in Blackboard for the logistic ODE.
+
+So, in the code you need to define the logistic equation first (similarly to how we did this in class). 
+
+dP/dt = A * (1 - P/K)
+
+Please use the parameters shown in the slide, i.e. A=0.08, K=1000 as default parameters.
+
+Next, plot the direction field for the range of parameters (t=0...100, P=0...1500) shown in the slide. For this, you can take your inspiration from the code of the Lotka-Volterra equations we discussed in class. 
+
+In order to integrate the ODE, **YOU HAVE TO USE EULER'S METHOD**!!! Try to find a suitable dt to make this work properly
+
+Now, when a user clicks into the figure, you should poll this location and show the evaluation from that point (towards earlier times and towards later times!). Try to reproduce the plot in slide 12.
+
+
+Your second task [40 points]:
+-----------------------------
+Please write a python script called "pendulum.py" that analyzes the behavior of a standard pendulum including friction. 
+
+For a pendulum, we know that we need to have a function of the angle of deflection - we will call this function alpha(t). Once I extend the pendulum from the 0 degree position, gravity will pull it back. If this was the only thing that existed, the pendulum would swing back and forth forever and we would have:
+
+alpha''(t) = - a*sin(alpha(t))
+
+So the acceleration in angle is given by some constant (related to earth gravity) and the sin of the deflection angle.
+
+[Incidentally, there is no known function that solves this ODE, as this is NONLINEAR in alpha - usually, you solve this for small angles alpha, where you can assume sin(alpha)~alpha...]
+
+Now, in addition to gravity we also have friction. Friction also pulls back the pendulum. Most of the time, the force that friction has is modeled as being proportional to the angular speed of the pendulum. We call the angular speed of the pendulum beta(t). Hence, we have
+
+alpha''(t) = - a*sin(alpha(t)) - b*beta(t)
+
+As you (hopefully) know, the angular speed is simply the time-derivative of the angle. So:
+
+beta(t) = alpha'(t)
+
+And with that (rearranging terms):
+
+alpha''(t) = - a*alpha'(t) - b*sin(alpha(t)) 
+
+Now, our solving methods cannot handle dual derivatives, only single ones. So, let's write the problem in two steps:
+
+alpha'(t) = beta(t)
+beta'(t) = -a*beta(t) - b*sin(alpha(t))
+
+Now, we have two equations instead of one. So, let's model this set of coupled equations in python.
+
+For this, first set up the function that implements this system using a 2D numpy array y, which contains as its first entry alpha, and as its second entry beta. So, we write the pODE-function as:
+
+def pODE(y,t,a,b):
+	return([    ,     ])
+	
+
+Assume a = 5, b = 0.25 in the following.
+
+First, we would like to solve the ODE using odeint for times from 0 to 50s with 101 values and starting values alpha0=pi-0.01 and beta0=0 (this corresponds to a pendulum which is almost extended fully upward and has initial velocity of 0. Solve the ODE and plot both alpha and beta into a plot and save this plot as "pendulum_1.png". When is the angular velocity maximal? Insert this as a comment into the script!
+
+Make a quiver-plot similar to the example in ode.ipynb from class with angles and angular velocities and plot a few trajectories with different starting points. You should plot a total of 8 trajectories from 0 to 1.0 * [pi-0.01, 10].  The plot should look similar to "pendulum_2.png" that I uploaded to github!
+
+Qualitatively describe the motion of the pendulum for the fastest versus the second-slowest trajectory (i.e., X0=(0,1) and X0=(3,10) in the figure). What does the pendulum do? Insert this description as a comment into the script. 
+
+
+
