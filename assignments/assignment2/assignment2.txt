@@ -21,7 +21,7 @@ Please write a python script called "logistics.py" that replicates the functiona
 
 So, in the code you need to define the logistic equation first (similarly to how we did this in class). 
 
-dP/dt = A * (1 - P/K)
+dP/dt = A * P * (1 - P/K)
 
 Please use the parameters shown in the slide, i.e. A=0.08, K=1000 as default parameters.
 
