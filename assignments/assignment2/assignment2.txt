@@ -54,12 +54,12 @@ beta(t) = alpha'(t)
 
 And with that (rearranging terms):
 
-alpha''(t) = - a*alpha'(t) - b*sin(alpha(t)) 
+alpha''(t) = - b*alpha'(t) - a*sin(alpha(t)) 
 
 Now, our solving methods cannot handle dual derivatives, only single ones. So, let's write the problem in two steps:
 
 alpha'(t) = beta(t)
-beta'(t) = -a*beta(t) - b*sin(alpha(t))
+beta'(t) = -b*beta(t) - a*sin(alpha(t))
 
 Now, we have two equations instead of one. So, let's model this set of coupled equations in python.
 
