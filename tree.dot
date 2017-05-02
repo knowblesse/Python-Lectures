@@ -1,0 +1,29 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname=helvetica] ;
+edge [fontname=helvetica] ;
+0 [label="Outlook_Overcast <= 0.5\nentropy = 0.9403\nsamples = 14\nvalue = [5, 9]", fillcolor="#399de571"] ;
+1 [label="Humidity_High <= 0.5\nentropy = 1.0\nsamples = 10\nvalue = [5, 5]", fillcolor="#e5813900"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="Windy <= 0.5\nentropy = 0.7219\nsamples = 5\nvalue = [1, 4]", fillcolor="#399de5bf"] ;
+1 -> 2 ;
+3 [label="entropy = 0.0\nsamples = 3\nvalue = [0, 3]", fillcolor="#399de5ff"] ;
+2 -> 3 ;
+4 [label="Temperature_Mild <= 0.5\nentropy = 1.0\nsamples = 2\nvalue = [1, 1]", fillcolor="#e5813900"] ;
+2 -> 4 ;
+5 [label="entropy = 0.0\nsamples = 1\nvalue = [1, 0]", fillcolor="#e58139ff"] ;
+4 -> 5 ;
+6 [label="entropy = 0.0\nsamples = 1\nvalue = [0, 1]", fillcolor="#399de5ff"] ;
+4 -> 6 ;
+7 [label="Outlook_Sunny <= 0.5\nentropy = 0.7219\nsamples = 5\nvalue = [4, 1]", fillcolor="#e58139bf"] ;
+1 -> 7 ;
+8 [label="Windy <= 0.5\nentropy = 1.0\nsamples = 2\nvalue = [1, 1]", fillcolor="#e5813900"] ;
+7 -> 8 ;
+9 [label="entropy = 0.0\nsamples = 1\nvalue = [0, 1]", fillcolor="#399de5ff"] ;
+8 -> 9 ;
+10 [label="entropy = 0.0\nsamples = 1\nvalue = [1, 0]", fillcolor="#e58139ff"] ;
+8 -> 10 ;
+11 [label="entropy = 0.0\nsamples = 3\nvalue = [3, 0]", fillcolor="#e58139ff"] ;
+7 -> 11 ;
+12 [label="entropy = 0.0\nsamples = 4\nvalue = [0, 4]", fillcolor="#399de5ff"] ;
+0 -> 12 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+}
