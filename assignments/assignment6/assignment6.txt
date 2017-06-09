@@ -1,0 +1,144 @@
+------------
+Assignment 6
+------------
+
+This assignment is due Thursday, June 15th at 23:59:59 latest via email to
+
+christian.wallraven+AMS2017@gmail.com
+
+I am fine with one email per team. In your email you HAVE to specify the names and student IDs of ALL team members. Zip all code and files you need for letting the program run and name the resulting zip-file in the following way:
+
+<STUDENTID1>_<STUDENTID2>_<...>_A6.zip
+
+Files and submissions that DO NOT have this pattern WILL NOT BE GRADED! Take care to use the correct IDs as these are my way of assigning the scores to individuals!
+
+Since almost all of you will be working in teams, I hope that you split the duties equally. Everyone should code a bit and - most importantly - everyone HAS to FULLY understand EVERY line of code AND be able to EXPLAIN THE CODE TO ME!!!
+
+
+
+
+Duking it out - Linear Ridge versus SVMs versus Decision Trees versus CNNs [60 points]:
+--------------------------------------------------------------------------
+
+We are going to test who wins in this battle of the not-so-simple classifiers!
+
+Make a script called Ridge_vs_SVM_vs_DT_vs_CNN.py, in which you test the power of Linear, regularized Ridge regression versus Support Vector Machines versus Decision Trees versus Convolutional Neural Networks in predicting the correct class on the MNIST data.
+
+For loading the MNIST data, please use the example code provided from class:
+
+######################## MNIST LOADING CODE #######################
+
+# Fetch data - caution this is 55MB for the first download!
+mnist = fetch_mldata('MNIST original', data_home='./data')
+
+# split the dataset into train and test and normalize
+# the first 60000 examples already are the training set
+split = 60000
+X_train = np.reshape(mnist.data[:split], (-1, 1, 28, 28))/255.0
+y_train = mnist.target[:split]
+# the remaining examples belong to the test set
+X_test = np.reshape(mnist.data[split:], (-1, 1, 28, 28))/255.0
+y_test = mnist.target[split:]
+
+######################## MNIST LOADING CODE #######################
+
+I want to know which of the classifiers does a better job on the test set, so you need to set the training up such that you use different subsets of X_train in order to train your classifiers. 
+
+You should use the RidgeClassifierCV, LinearSVC classifer and the DecisionTreeClassifier from sklearn, and you need to use the nnet package from https://github.com/andersbll/nnet/ and implement two types of CNN:
+
+a one-layer CONVnet
+
+nn = nnet.NeuralNetwork(
+    layers=[
+        nnet.Conv(
+            n_feats=12,
+            filter_shape=(5, 5),
+            strides=(1, 1),
+            weight_scale=0.1,
+        ),
+        nnet.Activation('relu'),
+        nnet.Flatten(),
+        nnet.Linear(
+            n_out=n_classes,
+            weight_scale=0.1,
+        ),
+        nnet.LogRegression(),
+    ],
+)
+
+and a two-layer CONVnet
+
+nn = nnet.NeuralNetwork(
+        layers=[
+            nnet.Conv(
+                n_feats=?????,
+                filter_shape=(5, 5),
+                strides=(1, 1),
+                weight_scale=0.1,
+            ),
+            nnet.Activation('relu'),
+            nnet.Pool(
+                pool_shape=(2, 2),
+                strides=(2, 2),
+                mode='max',
+            ),
+            nnet.Conv(
+                n_feats=?????,
+                filter_shape=(5, 5),
+                strides=(1, 1),
+                weight_scale=0.1,
+            ),
+            nnet.Activation('relu'),
+            nnet.Flatten(),
+            nnet.Linear(
+                n_out=n_classes,
+                weight_scale=0.1,
+            ),
+            nnet.LogRegression(),
+        ],
+    )
+    
+nn.fit(X_train, y_train, learning_rate=0.1, max_iter=50, batch_size=30)
+    
+Now for the training protocol. First, we need to select and optimize the parameters of the different algorithms. For this, we are going to select a **random subset** of 50000 samples from our X_train data.
+
+For this subset, do the following:
+
+For RidgeClassifierCV: Simply call it ^^ and use the result for the next step.
+
+For LinearSVC: Use GridSearchCV with the parameters: 'C': [0.1, 1, 10, 100, 1000] to find the best regularization
+
+For DecisionTreeClassifier: Use GridSearchCV with the parameters: 'max_depth': [2, 3, 4, 5, 6, None] to find the best tree depth.
+
+For CONVnet: Unfortunately, the nnet implementation is not compatible with the requirements of GridSearchCV (although one could make it compatible with a bit of effort...), so we have to do it ourselves. First, choose the one-layer network, do a 10-fold cross-validation on the subset and search over 
+
+n_feats=[2,4,6,8,12,16] 
+
+to find the best performance across the 10 folds. Then select this optimal parameter for the first layer of the two-layer CNN and do another 10-fold cross-validation to find out the optimal number of filters in the second layer over:
+
+n_feats=[2,4,6,8,12,16] #for second layer!
+
+
+Phew, that was a lot of pre-selections. Now we should have the optimal parameters for our algorithms. 
+
+-------------------STEP 2---------------------------------
+
+
+Using these best parameters, evaluate the performance on the test set. In order to be able to do some statistics, we are going to take different training subsets (random samples of n=50000 each), train the pre-selected classifiers on 20 different subsets, and average the results for each classifier. 
+
+Plot the performance of the different classifiers on the test set, using confidence intervals of the mean.
+
+
+-----------------------------------------------------------
+
+Tips:
+
+- if you get an error from the OneHot encoding from nnet, convert the mnist.target variable to an integer before sending it to the network
+
+- you can play around with the batch_sizes a bit if you like - check which one is better similarly to what we did in class
+
+- the "professional" implementation of CNNs would use regularization (i.e., weight_decay) as well as momentum in the updates. If you like, you can go here and compare the output of an optimized implementation with your results:
+
+http://cs.stanford.edu/people/karpathy/convnetjs/demo/mnist.html
+
+
